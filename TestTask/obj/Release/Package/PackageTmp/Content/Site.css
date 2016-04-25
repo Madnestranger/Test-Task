@@ -1,0 +1,43 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: Verdana;
+        background: red; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient(left, rgb(227, 198, 23), rgb(231, 150, 150)); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(right,rgb(227, 198, 23), rgb(231, 150, 150)); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(right,rgb(227, 198, 23), rgb(231, 150, 150)); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(to right, rgb(227, 198, 23), rgb(231, 150, 150)); /* Standard syntax */
+}
+
+ .jumbotron {
+        background: space;
+    }
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+input.form-control.ng-invalid.ng-dirty {
+    border-color: rgba(255, 102, 102, 1);
+}
+
+.dataTables_filter input {
+    border:none;
+}

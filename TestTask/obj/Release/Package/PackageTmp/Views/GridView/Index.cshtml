@@ -1,0 +1,127 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html ng-app="app">
+<head lang="en">
+    <meta charset="utf-8">
+    <title>App</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/angular-datatables.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/angular-datatables.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    
+</head>
+<body ng-controller="gridCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="jumbrotron text-center">
+                <h2>Landing page MVC, Grid with using Framework <strong>Angular.js</strong> <span class="glyphicon glyphicon-fire"></span></h2>
+            </div>
+            <div>
+                <table datatable="ng"
+                       dt-options="dtOptions"
+                       dt-column-defs="dtColumnsDef"
+                       class="row-border hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>
+                                <button class="btn" type="button" data-toggle="modal" data-target="#myModal" ng-click="newUser()"><i class="glyphicon glyphicon-plus"></i></button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="u in users">
+                            <td>{{ u.Id }}</td>
+                            <td>{{ u.Name }}</td>
+                            <td>{{ u.Email }}</td>
+                            <td>{{ u.Age }}</td>
+                            <td>{{ u.Gender }}</td>
+                            <td>
+                                <button type="button" data-toggle="modal" data-target="#myModal" ng-click="modify($index)" class="btn"><i class="glyphicon glyphicon-edit"></i></button>
+                                <button type="button" ng-click="remove($index)" class="btn"><i class="glyphicon glyphicon-remove"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="row">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">User</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form name="userForm"
+                                  novalidate
+                                  class="form-horizontal"
+                                  ng-submit="save()">
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label">Name</label>
+                                    <div class="col-sm-10">
+                                        <input ng-model="user.Name" pattern="^[A-Za-zА-Яа-яЁё\s]+$"
+                                               type="text"
+                                               class="form-control"
+                                               name="name"
+                                               placeholder="Name"
+                                               maxlength="50"
+                                               required>
+                                        <span ng-if="userForm.name.$error.pattern" class="text-danger">Remove unnecessary symbols, input only letters</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">Email</label>
+                                    <div class="col-sm-10">
+                                        <input ng-model="user.Email" type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="age" class="col-sm-2 control-label">Age</label>
+                                    <div class="col-sm-10">
+                                        <input ng-model="user.Age" type="number" min="0" max="100" class="form-control" id="age" placeholder="Age" name="age" required>
+                                        <span ng-if="userForm.age.$error.min || userForm.age.$error.max" class="text-danger">Age is more than 100 or less then 0</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gender" class="col-sm-2 control-label">Gender</label>
+                                    <div class="col-sm-10">
+                                        <select ng-model="user.Gender" type="email" class="form-control" id="gender" placeholder="Gender" required>
+                                            <option ng-repeat="gender in genders">{{gender}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" ng-disabled="userForm.$invalid" class="btn btn-default" onclick="$('#myModal').modal('hide')">Save</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
